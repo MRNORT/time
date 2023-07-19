@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T I M E</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #2E3440;
+      color: #ECEFF4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      color: #81A1C1;
+    }
+
+    .time-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-color: #4C566A;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .date-container {
+      padding: 5px 20px;
+      background-color: #81A1C1;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .date {
+      font-size: 24px;
+      margin: 0;
+      color: #ECEFF4;
+    }
+
+    .time {
+      font-size: 72px;
+      margin: 0;
+      color: #ECEFF4;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>T I M E</h1>
+    <div class="time-container" id="time-date-container">
+      <div class="date-container">
+        <p class="date" id="current-date">Loading...</p>
+      </div>
+      <p class="time" id="current-time">Loading...</p>
+    </div>
+  </div>
+
+  <script>
+    function updateTime() {
+      const timeElement = document.getElementById('current-time');
+      const dateElement = document.getElementById('current-date');
+      
+      const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+      const currentDate = new Date().toLocaleDateString();
+      
+      timeElement.textContent = currentTime;
+      dateElement.textContent = currentDate;
+
+      // Add animation classes after updating the content
+      const container = document.getElementById('time-date-container');
+      container.style.opacity = 0;
+      container.style.transform = 'scale(0.8)';
+      setTimeout(() => {
+        container.style.opacity = 1;
+        container.style.transform = 'scale(1)';
+      }, 10); // Add a small delay to ensure the update is visible
+    }
+
+    setInterval(updateTime, 1000); // Update time every second
+    updateTime(); // Update time immediately after loading the page
+  </script>
+</body>
+
+</html>
